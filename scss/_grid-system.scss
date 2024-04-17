@@ -1,0 +1,47 @@
+@use 'variables'as v;
+@use 'sass:math';
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-left: (v.$gap+px);
+  padding-right: (v.$gap+px);
+  width: 80vw;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -(v.$gap+px);
+  margin-right: -(v.$gap+px);
+  margin-top: 20px;
+}
+
+[class*="col-"] {
+  padding-left: (v.$gap+px);
+  padding-right: (v.$gap+px);
+}
+
+@mixin generateColumns($prefix: undefined) {
+  @for $i from 1 through 12 {
+    @if ($prefix !=undefined) {
+      .col-#{$prefix}-#{$i} {
+        width: math.percentage(math.div($i, 12));
+      }
+    }
+
+    @else {
+      .col-#{$i} {
+        width: math.percentage(math.div($i, 12));
+      }
+    }
+  }
+}
+
+@mixin generateColumnsWithBreakpoints() {
+  @each $breakpoint, $value in v.$breakpoints {
+    @media (min-width: $value) {
+      @include generateColumns($breakpoint);
+    }
+  }
+}

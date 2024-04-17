@@ -1,0 +1,22 @@
+@use 'grid-system';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: lightblue;
+
+  h1 {
+    color: darkblue;
+  }
+
+  .box {
+    border: 1px solid black;
+  }
+}
+
+@include grid-system.generateColumns();
+@include grid-system.generateColumnsWithBreakpoints();
